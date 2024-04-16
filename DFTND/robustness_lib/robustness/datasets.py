@@ -4,6 +4,7 @@ import time
 
 import torch
 import torchvision.models as models
+from torchvision.models import resnet18
 
 import torch
 import torch.utils.data
@@ -133,9 +134,9 @@ class CIFAR(DataSet):
 
     def get_model(self, arch):
 
-        resnet18_model = models.resnet18()
-        num_features = resnet18_model.fc.in_features  # Get the number of input features of the original fc layer
-        resnet18_model.fc = torch.nn.Linear(num_features, self.num_classes)
+        resnet18_model = resnet18(num_classes=self.num_classes)
+        # num_features = resnet18_model.fc.in_features  # Get the number of input features of the original fc layer
+        # resnet18_model.fc = torch.nn.Linear(num_features, self.num_classes)
 
         return resnet18_model
 
