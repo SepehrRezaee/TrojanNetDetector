@@ -31,14 +31,14 @@ def make_and_restore_model(*_, arch, dataset, resume_path=None,
             #     state_dict_path = 'state_dict'
 
             sd = checkpoint['model']
-            print(sd)
+            print(sd.keys())
             # if list(sd.keys())[0].startswith('module'):
             #     sd = {k[len('module.'):]:v for k,v in sd.items()}
             #     print(sd)
-            print(model)
+            # print(model)
             model.load_state_dict(sd)
-            if parallel:
-                model = ch.nn.DataParallel(model)
+            # if parallel:
+            #     model = ch.nn.DataParallel(model)
             model = model.cuda()
 
             loaded_epoch = resume_epoch if resume_epoch is not None else checkpoint['epoch']
