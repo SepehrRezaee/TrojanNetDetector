@@ -4,7 +4,7 @@ import time
 
 import torch
 import torchvision.models as models
-from torchvision.models import resnet18
+from torchvision.models.resnet import resnet18
 
 import torch
 import torch.utils.data
@@ -136,9 +136,9 @@ class CIFAR(DataSet):
 
     def get_model(self, arch):
         # Assuming arch is 'resnet18' and it's passed correctly to this function
-        if arch == 'resnet18':
-            resnet18_model = resnet18(pretrained=False, num_classes=self.num_classes)
-            return resnet18_model
+        # if arch == 'resnet18':
+        resnet18_model = resnet18(pretrained=False, num_classes=self.num_classes)
+        return resnet18_model
 
 # class CINIC(DataSet):
 #     def __init__(self, data_path, **kwargs):
