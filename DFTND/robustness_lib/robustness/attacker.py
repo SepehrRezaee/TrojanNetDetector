@@ -304,8 +304,10 @@ class AttackerModel(ch.nn.Module):
 
         if with_image:
             normalized_inp = self.normalizer(inp)
-            output = self.model(normalized_inp, with_latent=with_latent,
-                                                    fake_relu=fake_relu)
+            output = self.model(normalized_inp
+                                # with_latent=with_latent,
+                                #                     fake_relu=fake_relu
+                                                    )
         else:
             output = None
 
