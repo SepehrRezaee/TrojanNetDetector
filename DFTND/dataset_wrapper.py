@@ -33,7 +33,7 @@ REPRESENTATION_SIZE = 2048 # Size of representation vector (fixed for model)
 #CLASSES = CLASS_DICT[DATA] # Class names for dataset
 
 
-config = utilities.config_to_namedtuple(utilities.get_config('config_traincifar.json'))
+config = utilities.config_to_namedtuple(utilities.get_config('/kaggle/working/TrojanNetDetector/DFTND/config_traincifar.json'))
 model_dir = config.model.output_dir
 if not os.path.exists(model_dir):
   os.makedirs(model_dir)
