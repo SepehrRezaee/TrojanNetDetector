@@ -31,9 +31,11 @@ def make_and_restore_model(*_, arch, dataset, resume_path=None,
             #     state_dict_path = 'state_dict'
 
             sd = checkpoint['model']
+            print(sd)
             # if list(sd.keys())[0].startswith('module'):
             #     sd = {k[len('module.'):]:v for k,v in sd.items()}
             #     print(sd)
+            print(model)
             model.load_state_dict(sd)
             if parallel:
                 model = ch.nn.DataParallel(model)
