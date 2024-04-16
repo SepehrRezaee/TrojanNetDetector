@@ -22,7 +22,7 @@ def make_and_restore_model(*_, arch, dataset, resume_path=None,
 
     model = AttackerModel(classifier_model, dataset)
 
-    print(model.items())
+    # print(model.items())
 
     # optionally resume from a checkpoint
     checkpoint = None
