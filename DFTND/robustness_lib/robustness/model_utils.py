@@ -18,7 +18,7 @@ def make_and_restore_model(*_, arch, dataset, resume_path=None,
     """
     classifier_model = dataset.get_model(arch)
 
-    
+    print(classifier_model.items())
 
     model = AttackerModel(classifier_model, dataset)
 

@@ -277,7 +277,7 @@ class Attacker(ch.nn.Module):
 class AttackerModel(ch.nn.Module):
     def __init__(self, model, dataset):
         super(AttackerModel, self).__init__()
-        self.normalizer = helpers.InputNormalize(dataset.mean, dataset.std)
+        # self.normalizer = helpers.InputNormalize(dataset.mean, dataset.std)
         self.model = model
         self.attacker = Attacker(model, dataset)
 
