@@ -27,12 +27,13 @@ def make_and_restore_model(*_, arch, dataset, resume_path=None,
             print("=> loading checkpoint '{}'".format(resume_path))
             checkpoint = ch.load(resume_path, pickle_module=dill)
 
-            if state_dict_path == 'model' and not ('model' in checkpoint):
-                state_dict_path = 'state_dict'
+            # if state_dict_path == 'model' and not ('model' in checkpoint):
+            #     state_dict_path = 'state_dict'
 
-            sd = checkpoint[state_dict_path]
+            sd = checkpoint['model']
             if list(sd.keys())[0].startswith('module'):
                 sd = {k[len('module.'):]:v for k,v in sd.items()}
+                print(sd)
             model.load_state_dict(sd)
             if parallel:
                 model = ch.nn.DataParallel(model)

@@ -55,7 +55,7 @@ class Attacker(ch.nn.Module):
 
         def get_adv_examples(x):
 
-            pert = ch.empty(x.shape).normal_(mean=0,std=sigma).cuda()
+            pert = ch.empty(x.shape).normal_(mean=0, std=sigma).cuda()
             #print(ch.max(pert).item())
             # Random start (to escape certain types of gradient masking)
             if random_start:

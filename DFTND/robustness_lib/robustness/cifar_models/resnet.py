@@ -141,10 +141,10 @@ def ResNet101(**kwargs):
 def ResNet152(**kwargs):
     return ResNet(Bottleneck, [3,8,36,3], **kwargs)
 
-resnet50 = ResNet50
+# resnet50 = ResNet50
 resnet18 = ResNet18
-resnet101 = ResNet101
-resnet152 = ResNet152
+# resnet101 = ResNet101
+# resnet152 = ResNet152
 
 # resnet18thin = ResNet18Thin
 # resnet18wide = ResNet18Wide

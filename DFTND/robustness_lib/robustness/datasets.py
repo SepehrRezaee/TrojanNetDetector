@@ -3,6 +3,9 @@ import shutil
 import time
 
 import torch
+import torchvision.models as models
+
+import torch
 import torch.utils.data
 from . import imagenet_models as models
 from torchvision import transforms, datasets
@@ -10,7 +13,7 @@ ch = torch
 
 from . import constants
 from . import loaders
-from . import cifar_models
+# from . import cifar_models
 
 from .helpers import get_label_mapping
 
@@ -66,8 +69,16 @@ class ImageNet(DataSet):
         self.transform_train = constants.TRAIN_TRANSFORMS_224
         self.transform_test = constants.TEST_TRANSFORMS_224
 
+        # Load the ResNet18 model. This loads the architecture with randomly initialized weights.
+        resnet18_model = models.resnet18()
+        num_features = resnet18_model.fc.in_features  # Get the number of input features of the original fc layer
+        resnet18_model.fc = torch.nn.Linear(num_features, self.num_classes)
+
+        # If you want the ResNet18 model pre-trained on ImageNet, set pretrained=True.
+        # resnet18_pretrained = models.resnet18(pretrained=False)
+
     def get_model(self, arch):
-        return models.__dict__[arch](num_classes=self.num_classes)
+        return resnet18_model
 
 class RestrictedImageNet(DataSet):
     def __init__(self, data_path, **kwargs):
