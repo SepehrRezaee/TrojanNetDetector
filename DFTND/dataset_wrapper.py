@@ -6,7 +6,7 @@ import seaborn as sns
 from scipy import stats
 from tqdm import tqdm, tqdm_notebook
 import matplotlib.pyplot as plt
-from robustrobustness_lib.robustnessness import model_utils, datasets
+from robustness_lib.robustness import model_utils, datasets
 from robustness_lib.robustness.tools.vis_tools import show_image_row, show_image_column
 #from robustness.tools.constants import CLASS_DICT
 #from user_constants import DATA_PATH_DICT
