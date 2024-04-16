@@ -18,6 +18,8 @@ def make_and_restore_model(*_, arch, dataset, resume_path=None,
     """
     classifier_model = dataset.get_model(arch)
 
+    
+
     model = AttackerModel(classifier_model, dataset)
 
     # optionally resume from a checkpoint

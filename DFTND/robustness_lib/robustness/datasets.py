@@ -58,62 +58,62 @@ class DataSet(object):
                                     subset_type=subset_type,
                                     only_val=only_val)
 
-class ImageNet(DataSet):
-    def __init__(self, data_path, **kwargs):
-        super(ImageNet, self).__init__('imagenet')
-        self.data_path = data_path
-        self.mean = constants.IMAGENET_MEAN
-        self.std = constants.IMAGENET_STD
-        self.num_classes = 9
+# class ImageNet(DataSet):
+#     def __init__(self, data_path, **kwargs):
+#         super(ImageNet, self).__init__('imagenet')
+#         self.data_path = data_path
+#         self.mean = constants.IMAGENET_MEAN
+#         self.std = constants.IMAGENET_STD
+#         self.num_classes = 9
 
-        self.transform_train = constants.TRAIN_TRANSFORMS_224
-        self.transform_test = constants.TEST_TRANSFORMS_224
+#         self.transform_train = constants.TRAIN_TRANSFORMS_224
+#         self.transform_test = constants.TEST_TRANSFORMS_224
 
-        # Load the ResNet18 model. This loads the architecture with randomly initialized weights.
-        resnet18_model = models.resnet18()
-        num_features = resnet18_model.fc.in_features  # Get the number of input features of the original fc layer
-        resnet18_model.fc = torch.nn.Linear(num_features, self.num_classes)
+#         # Load the ResNet18 model. This loads the architecture with randomly initialized weights.
+#         resnet18_model = models.resnet18()
+#         num_features = resnet18_model.fc.in_features  # Get the number of input features of the original fc layer
+#         resnet18_model.fc = torch.nn.Linear(num_features, self.num_classes)
 
-        # If you want the ResNet18 model pre-trained on ImageNet, set pretrained=True.
-        # resnet18_pretrained = models.resnet18(pretrained=False)
+#         # If you want the ResNet18 model pre-trained on ImageNet, set pretrained=True.
+#         # resnet18_pretrained = models.resnet18(pretrained=False)
 
-    def get_model(self, arch):
-        return resnet18_model
+#     def get_model(self, arch):
+#         return resnet18_model
 
-class RestrictedImageNet(DataSet):
-    def __init__(self, data_path, **kwargs):
-        name = 'restricted_imagenet'
-        super(RestrictedImageNet, self).__init__(name)
-        self.data_path = data_path
-        self.mean = constants.IMAGENET_MEAN
-        self.std = constants.IMAGENET_STD
-        self.num_classes = len(constants.RESTRICTED_RANGES)
+# class RestrictedImageNet(DataSet):
+#     def __init__(self, data_path, **kwargs):
+#         name = 'restricted_imagenet'
+#         super(RestrictedImageNet, self).__init__(name)
+#         self.data_path = data_path
+#         self.mean = constants.IMAGENET_MEAN
+#         self.std = constants.IMAGENET_STD
+#         self.num_classes = len(constants.RESTRICTED_RANGES)
 
-        self.transform_train = constants.TRAIN_TRANSFORMS_224
-        self.transform_test = constants.TEST_TRANSFORMS_224
+#         self.transform_train = constants.TRAIN_TRANSFORMS_224
+#         self.transform_test = constants.TEST_TRANSFORMS_224
 
-        self.label_mapping = get_label_mapping(self.ds_name,
-                constants.RESTRICTED_RANGES)
+#         self.label_mapping = get_label_mapping(self.ds_name,
+#                 constants.RESTRICTED_RANGES)
 
-    def get_model(self, arch):
-        return models.__dict__[arch](num_classes=self.num_classes)
+#     def get_model(self, arch):
+#         return models.__dict__[arch](num_classes=self.num_classes)
 
-class RestrictedImageNetBalanced(DataSet):
-    def __init__(self, data_path, **kwargs):
-        super(RestrictedImageNetBalanced, self).__init__('restricted_imagenet_balanced')
-        self.data_path = data_path
-        self.mean = constants.IMAGENET_MEAN
-        self.std = constants.IMAGENET_STD
-        self.num_classes = len(constants.BALANCED_RANGES)
+# class RestrictedImageNetBalanced(DataSet):
+#     def __init__(self, data_path, **kwargs):
+#         super(RestrictedImageNetBalanced, self).__init__('restricted_imagenet_balanced')
+#         self.data_path = data_path
+#         self.mean = constants.IMAGENET_MEAN
+#         self.std = constants.IMAGENET_STD
+#         self.num_classes = len(constants.BALANCED_RANGES)
 
-        self.transform_train = constants.TRAIN_TRANSFORMS_224
-        self.transform_test = constants.TEST_TRANSFORMS_224
+#         self.transform_train = constants.TRAIN_TRANSFORMS_224
+#         self.transform_test = constants.TEST_TRANSFORMS_224
 
-        self.label_mapping = get_label_mapping(self.ds_name,
-                constants.BALANCED_RANGES)
+#         self.label_mapping = get_label_mapping(self.ds_name,
+#                 constants.BALANCED_RANGES)
 
-    def get_model(self, arch):
-        return models.__dict__[arch](num_classes=self.num_classes)
+#     def get_model(self, arch):
+#         return models.__dict__[arch](num_classes=self.num_classes)
 
 class CIFAR(DataSet):
     def __init__(self, data_path='/tmp/', **kwargs):
@@ -132,50 +132,50 @@ class CIFAR(DataSet):
     #     return cifar_models.__dict__[arch](num_classes=self.num_classes)
 
     def get_model(self, arch):
-        
+
         resnet18_model = models.resnet18()
         num_features = resnet18_model.fc.in_features  # Get the number of input features of the original fc layer
         resnet18_model.fc = torch.nn.Linear(num_features, self.num_classes)
 
         return resnet18_model
 
-class CINIC(DataSet):
-    def __init__(self, data_path, **kwargs):
-        super(CINIC, self).__init__('cinic')
-        self.data_path = data_path
-        self.mean = constants.CINIC_MEAN
-        self.std = constants.CINIC_STD
-        self.num_classes = 10
+# class CINIC(DataSet):
+#     def __init__(self, data_path, **kwargs):
+#         super(CINIC, self).__init__('cinic')
+#         self.data_path = data_path
+#         self.mean = constants.CINIC_MEAN
+#         self.std = constants.CINIC_STD
+#         self.num_classes = 10
 
-        self.transform_train = constants.TRAIN_TRANSFORMS(32)
-        self.transform_test = constants.TEST_TRANSFORMS(32)
+#         self.transform_train = constants.TRAIN_TRANSFORMS(32)
+#         self.transform_test = constants.TEST_TRANSFORMS(32)
 
-    def get_model(self, arch):
-        return cifar_models.__dict__[arch](num_classes=self.num_classes)
+#     def get_model(self, arch):
+#         return cifar_models.__dict__[arch](num_classes=self.num_classes)
 
-class A2B(DataSet):
-    def __init__(self, data_path, **kwargs):
-        _, ds_name = os.path.split(data_path)
-        valid_names = ['horse2zebra', 'apple2orange', 'summer2winter_yosemite']
-        assert ds_name in valid_names, "path must end in one of {0}, not {1}".format(valid_names, ds_name)
-        super(A2B, self).__init__(ds_name)
-        self.data_path = data_path
-        self.mean = constants.DEFAULT_MEAN
-        self.std = constants.DEFAULT_STD
-        self.num_classes = 2
+# class A2B(DataSet):
+#     def __init__(self, data_path, **kwargs):
+#         _, ds_name = os.path.split(data_path)
+#         valid_names = ['horse2zebra', 'apple2orange', 'summer2winter_yosemite']
+#         assert ds_name in valid_names, "path must end in one of {0}, not {1}".format(valid_names, ds_name)
+#         super(A2B, self).__init__(ds_name)
+#         self.data_path = data_path
+#         self.mean = constants.DEFAULT_MEAN
+#         self.std = constants.DEFAULT_STD
+#         self.num_classes = 2
 
-        self.transform_train = constants.TRAIN_TRANSFORMS_224
-        self.transform_test = constants.TEST_TRANSFORMS_224
+#         self.transform_train = constants.TRAIN_TRANSFORMS_224
+#         self.transform_test = constants.TEST_TRANSFORMS_224
 
-    def get_model(self, arch):
-        return models.__dict__[arch](num_classes=self.num_classes)
+#     def get_model(self, arch):
+#         return models.__dict__[arch](num_classes=self.num_classes)
 
 ### Dictionary of datasets
 DATASETS = {
-    'imagenet': ImageNet,
-    'restricted_imagenet': RestrictedImageNet,
-    'restricted_imagenet_balanced': RestrictedImageNetBalanced,
+    # 'imagenet': ImageNet,
+    # 'restricted_imagenet': RestrictedImageNet,
+    # 'restricted_imagenet_balanced': RestrictedImageNetBalanced,
     'cifar': CIFAR,
-    'cinic': CINIC,
-    'a2b': A2B,
+    # 'cinic': CINIC,
+    # 'a2b': A2B,
 }
