@@ -128,8 +128,18 @@ class CIFAR(DataSet):
 
         self.custom_class = datasets.CIFAR10
 
+    # def get_model(self, arch):
+    #     return cifar_models.__dict__[arch](num_classes=self.num_classes)
+
+        resnet18_model = models.resnet18()
+        num_features = resnet18_model.fc.in_features  # Get the number of input features of the original fc layer
+        resnet18_model.fc = torch.nn.Linear(num_features, self.num_classes)
+
+        # If you want the ResNet18 model pre-trained on ImageNet, set pretrained=True.
+        # resnet18_pretrained = models.resnet18(pretrained=False)
+
     def get_model(self, arch):
-        return cifar_models.__dict__[arch](num_classes=self.num_classes)
+        return resnet18_model
 
 class CINIC(DataSet):
     def __init__(self, data_path, **kwargs):
