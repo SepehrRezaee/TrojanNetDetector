@@ -18,9 +18,11 @@ def make_and_restore_model(*_, arch, dataset, resume_path=None,
     """
     classifier_model = dataset.get_model(arch)
 
-    print(classifier_model.items())
+    # print(classifier_model)
 
     model = AttackerModel(classifier_model, dataset)
+
+    print(model.items())
 
     # optionally resume from a checkpoint
     checkpoint = None
@@ -43,7 +45,7 @@ def make_and_restore_model(*_, arch, dataset, resume_path=None,
             #     model = ch.nn.DataParallel(model)
             model = model.cuda()
 
-            loaded_epoch = resume_epoch if resume_epoch is not None else checkpoint['epoch']
+            # loaded_epoch = resume_epoch if resume_epoch is not None else checkpoint['epoch']
             print("=> loaded checkpoint '{}' (epoch {})".format(resume_path, loaded_epoch))
         else:
             error_msg = "=> no checkpoint found at '{}'".format(resume_path)
