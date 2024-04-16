@@ -32,22 +32,8 @@ def make_and_restore_model(*_, arch, dataset, resume_path=None,
             print("=> loading checkpoint '{}'".format(resume_path))
             checkpoint = ch.load(resume_path)['model']
 
-            # if state_dict_path == 'model' and not ('model' in checkpoint):
-            #     state_dict_path = 'state_dict'
-
-            # sd = checkpoint['model']
-            # print(sd.keys())
-            # if list(sd.keys())[0].startswith('module'):
-            #     sd = {k[len('module.'):]:v for k,v in sd.items()}
-            #     print(sd)
-            # print(model)
-            # model.load_state_dict(sd)
-            # if parallel:
-            #     model = ch.nn.DataParallel(model)
             model = model.cuda()
 
-            # loaded_epoch = resume_epoch if resume_epoch is not None else checkpoint['epoch']
-            # print("=> loaded checkpoint '{}' (epoch {})".format(resume_path, loaded_epoch))
         else:
             error_msg = "=> no checkpoint found at '{}'".format(resume_path)
             raise ValueError(error_msg)
