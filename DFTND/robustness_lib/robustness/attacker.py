@@ -24,6 +24,8 @@ class Attacker(ch.nn.Module):
         self.normalize = helpers.InputNormalize(dataset.mean, dataset.std)
         self.model = model
 
+        print("hello")
+
     def forward(self, x, target, *_, constraint, eps, step_size, iterations, criterion,
                 random_start=False, random_restarts=False, do_tqdm=False,
                 targeted=False, custom_loss=None, should_normalize=True, 
@@ -283,6 +285,8 @@ class AttackerModel(ch.nn.Module):
 
     def forward(self, inp, target=None, make_adv=False, with_latent=False,
                     fake_relu=False, with_image=True, **attacker_kwargs):
+        
+        print("helllllllllll")
         if make_adv:
             assert target is not None
             prev_training = bool(self.training)
