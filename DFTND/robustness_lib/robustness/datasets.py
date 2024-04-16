@@ -132,13 +132,13 @@ class CIFAR(DataSet):
     # def get_model(self, arch):
     #     return cifar_models.__dict__[arch](num_classes=self.num_classes)
 
+    # def get_model(self, arch):
+
     def get_model(self, arch):
-
-        resnet18_model = resnet18(num_classes=self.num_classes)
-        # num_features = resnet18_model.fc.in_features  # Get the number of input features of the original fc layer
-        # resnet18_model.fc = torch.nn.Linear(num_features, self.num_classes)
-
-        return resnet18_model
+        # Assuming arch is 'resnet18' and it's passed correctly to this function
+        if arch == 'resnet18':
+            resnet18_model = resnet18(pretrained=False, num_classes=self.num_classes)
+            return resnet18_model
 
 # class CINIC(DataSet):
 #     def __init__(self, data_path, **kwargs):
