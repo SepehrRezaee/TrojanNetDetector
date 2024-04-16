@@ -124,7 +124,7 @@ class Attacker(ch.nn.Module):
 #                 for iii in range(10):
 #                     W[iii][maxp[iii]] = 1
                 
-                W = ch.ones(num_classes, requires_grad=True).requires_grad_(True).cuda() / num_classes
+                W = ch.ones(10, requires_grad=True).requires_grad_(True).cuda() / num_classes
 
                 # When expanding W for batch multiplication, we use num_classes instead of a hardcoded value
                 W1 = W.unsqueeze(0).expand(x.size(0), -1)
